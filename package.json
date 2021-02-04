@@ -17,6 +17,7 @@
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-hook-form": "^6.15.1",
+    "react-i18next": "^11.8.5",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
@@ -110,8 +111,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run lint-diff && npm run lint-scss",
-      "pre-push": "npm run coverage-diff"
+      "pre-commit": "npm run lint-diff && npm run lint-scss"
     }
   }
 }

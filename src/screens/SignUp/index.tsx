@@ -3,6 +3,10 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import i18next from 'i18next';
 
+// import { useLazyRequest } from 'hooks/useRequest';
+
+import { signUpService } from '../../services/SignUpService';
+
 import logo from './assets/image.png';
 import styles from './styles.module.scss';
 
@@ -15,11 +19,22 @@ interface IFormInput {
 }
 
 function SignUp() {
-  const { register, errors, handleSubmit, watch, trigger } = useForm<IFormInput>();
+  const { register, errors, handleSubmit, watch } = useForm<IFormInput>();
 
-  const onSubmit = (data: IFormInput) => {
-    console.log(data);
-  };
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // const [state, loading, error, signUpRequest] = useLazyRequest({
+  //   request: signUpService,
+  //   withPostSuccess: response => {
+  //     console.log(response);
+  //   },
+  //   withPostFailure: () => {
+  //     console.log(error);
+  //   }
+  // });
+
+  function onSubmit(values: IFormInput) {
+    signUpService(values);
+  }
 
   return (
     <div className={styles.app}>
@@ -29,32 +44,28 @@ function SignUp() {
           <label className={styles.appLabel}>{i18next.t('SignUp:firstName') as string} </label>
           <input type="text" name="firstName" ref={register({ required: true })} />
           {errors.firstName && errors.firstName.type === 'required' && (
-            <label className={styles.appLabelError}> Nombre obligatorio </label>
+            <span className={styles.appLabelError}> {i18next.t('SignUp:errorFirstName') as string} </span>
           )}
 
           <label className={styles.appLabel}>{i18next.t('SignUp:lastName') as string} </label>
           <input type="text" name="lastName" ref={register({ required: true })} />
           {errors.lastName && errors.lastName.type === 'required' && (
-            <label className={styles.appLabelError}> Apellido obligatorio </label>
+            <span className={styles.appLabelError}> {i18next.t('SignUp:errorLastName') as string} </span>
           )}
 
           <label className={styles.appLabel}>{i18next.t('SignUp:email') as string} </label>
           <input type="email" name="email" ref={register({ required: true })} />
           {errors.email && errors.email.type === 'required' && (
-            <label className={styles.appLabelError}> E-mail obligatorio </label>
+            <span className={styles.appLabelError}> {i18next.t('SignUp:errorEmail') as string} </span>
           )}
 
           <label className={styles.appLabel}>{i18next.t('SignUp:password') as string} </label>
-          <input
-            type="password"
-            name="password"
-            onChange={() => {
-              trigger('passwordConfirmation');
-            }}
-            ref={register({ required: true })}
-          />
+          <input type="password" name="password" ref={register({ required: true, minLength: 6 })} />
           {errors.password && errors.password.type === 'required' && (
-            <label className={styles.appLabelError}> Ingrese una contraseña, por favor </label>
+            <span className={styles.appLabelError}> {i18next.t('SignUp:errorPassword') as string} </span>
+          )}
+          {errors.password && errors.password.type === 'minLength' && (
+            <span className={styles.appLabelError}>{i18next.t('SignUp:errorPasswordFormat') as string}</span>
           )}
 
           <label className={styles.appLabel}>{i18next.t('SignUp:passwordConfirmation') as string} </label>
@@ -64,10 +75,14 @@ function SignUp() {
             ref={register({ required: true, validate: value => value === watch('password') })}
           />
           {errors.passwordConfirmation && errors.passwordConfirmation.type === 'required' && (
-            <label className={styles.appLabelError}> Repita su contraseña </label>
+            <label className={styles.appLabelError}>
+              {i18next.t('SignUp:errorPasswordConfirmation') as string}
+            </label>
           )}
           {errors.passwordConfirmation && errors.passwordConfirmation.type === 'validate' && (
-            <label className={styles.appLabelError}> Las contraseñas no coinciden </label>
+            <label className={styles.appLabelError}>
+              {i18next.t('SignUp:errorPasswordConfirmationIdem') as string}
+            </label>
           )}
 
           <input type="submit" value={i18next.t('SignUp:signUp') as string} className={styles.appSignup} />
