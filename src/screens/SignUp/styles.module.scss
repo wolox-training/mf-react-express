@@ -1,7 +1,11 @@
 @import '../../scss/variables/colors';
 
-.app {
-  background-color: $white;
+%input {
+  border-radius: 4px;
+  border: 1px solid $white;
+  margin: 15px 25px;
+  padding: 10px;
+  width: 300px;
 }
 
 .app-form {
@@ -13,6 +17,15 @@
   justify-content: center;
   margin: 75px auto;
   max-width: 350px;
+}
+
+.app-input {
+
+  @extend %input;
+}
+
+.app-hr {
+  margin: 10px 20px;
 }
 
 .app-label {
@@ -29,6 +42,8 @@
 }
 
 .app-login {
+
+  @extend %input;
   background: transparent;
   border: 2px solid $atlantis;
   color: $atlantis;
@@ -43,25 +58,14 @@
 }
 
 .app-signup {
+
+  @extend %input;
   background: $atlantis;
   border: 2px solid $atlantis;
   color: $white;
   font-size: 16px;
 }
 
-input {
-  border-radius: 4px;
-  border: 1px solid $white;
-  margin: 15px 25px;
-  padding: 10px;
-  width: 300px;
-}
-
-input:invalid {
-  border-radius: 4px;
-  border: 1px solid $red;
-}
-
-hr {
-  margin: 10px 20px;
+.error {
+  border: 2px solid $red;
 }
