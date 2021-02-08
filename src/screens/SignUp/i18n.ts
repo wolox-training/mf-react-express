@@ -13,7 +13,7 @@ i18next.addResources('es', 'SignUp', {
   lastName: 'Apellido',
   login: 'Login',
   logoAlt: 'Logo',
-  password: 'Password',
-  passwordConfirmation: 'Confirmación de Password',
-  signUp: 'Sign Up'
+  password: 'Contraseña',
+  passwordConfirmation: 'Confirmación de Contraseña',
+  signUp: 'Registrarse'
 });
