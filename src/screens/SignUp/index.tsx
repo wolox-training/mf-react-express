@@ -1,5 +1,5 @@
 /* eslint-disable complexity */
-import React from 'react';
+import React, { useState } from 'react';
 import { FieldError, useForm } from 'react-hook-form';
 import i18next from 'i18next';
 
@@ -21,15 +21,21 @@ interface IFormInput {
 function SignUp() {
   const { register, errors, handleSubmit, watch } = useForm<IFormInput>();
 
+  const [loading, setLoading] = useState(false);
+
   const [, , error, signUpRequest] = useLazyRequest({
     request: signUpService,
     // TODO this console.log() will be removed when I develop the home screen
-    withPostSuccess: response => console.log(response)
+    withPostSuccess: response => {
+      console.log(response);
+      setLoading(false);
+    },
+    withPostFailure: () => setLoading(false)
   });
 
   const onSubmit = (values: IFormInput) => {
     delete values.passwordConfirmation;
-
+    setLoading(true);
     signUpRequest(values);
   };
 
@@ -132,6 +138,8 @@ function SignUp() {
             {i18next.t('SignUp:errorSignUp') as string} {error.problem}
           </span>
         )}
+
+        {loading && <span className={styles.appHr}>{i18next.t('SignUp:loading') as string}</span>}
 
         <hr className={styles.appHr} />
         <input type="button" value={i18next.t('SignUp:login') as string} className={styles.appLogin} />
