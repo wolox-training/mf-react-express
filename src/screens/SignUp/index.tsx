@@ -27,7 +27,7 @@ function SignUp() {
       <img src={logo} className={styles.appLogo} alt={i18next.t('SignUp:logoAlt') as string} />
       <form onSubmit={handleSubmit(onSubmit)}>
         {FIELDS.map((field: string) => (
-          <div key="field">
+          <div key={field}>
             <label className={styles.appLabel}>{i18next.t(`SignUp:${field}`) as string} </label>
             <input name={field} className={styles.appInput} ref={register} />
           </div>
