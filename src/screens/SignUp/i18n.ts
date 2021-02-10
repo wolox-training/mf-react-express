@@ -9,6 +9,7 @@ i18next.addResources('es', 'SignUp', {
   errorPasswordConfirmation: 'Repita su contraseña',
   errorPasswordConfirmationIdem: 'Las contraseñas no coinciden',
   errorPasswordFormat: 'La contraseña es muy corta, debe tener minimo 6 caracteres',
+  errorSignUp: 'Un error ocurrio al registrarse: ',
   firstName: 'Nombre',
   lastName: 'Apellido',
   login: 'Login',
