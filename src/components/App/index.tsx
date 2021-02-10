@@ -1,15 +1,11 @@
 import React from 'react';
 
-import 'scss/application.scss';
 import SignUp from 'screens/SignUp';
-import CustomSuspense from 'components/Suspense';
+
+import 'scss/application.scss';
 
 function App() {
-  return (
-    <CustomSuspense>
-      <SignUp />
-    </CustomSuspense>
-  );
+  return <SignUp />;
 }
 
 export default App;
