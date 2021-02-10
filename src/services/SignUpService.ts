@@ -1,6 +1,6 @@
-import { create } from 'apisauce';
+import api from '../config/api';
 
-const api = create({ baseURL: 'https://books-training-rails.herokuapp.com' });
+api.setBaseURL('https://books-training-rails.herokuapp.com');
 
 export interface IFormInput {
   email: string;

@@ -22,17 +22,17 @@ const api = create({
   timeout: 15000
 });
 
+api.addRequestTransform(request => {
+  if (request.params) {
+    request.params = serializer.serialize(request.params);
+  }
+  if (request.data) {
+    request.data = serializer.serialize(request.data);
+  }
+});
+
 // eslint-disable-next-line no-unused-vars, prettier/prettier, @typescript-eslint/no-unused-vars
 export const apiSetup = dispatch => {
-  api.addRequestTransform(request => {
-    if (request.params) {
-      request.params = serializer.serialize(request.params);
-    }
-    if (request.data) {
-      request.data = serializer.serialize(request.data);
-    }
-  });
-  
   api.addMonitor(response => {
     if (response.status === STATUS_CODES.unauthorized) {
       /*
