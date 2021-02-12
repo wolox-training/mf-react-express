@@ -1,11 +1,11 @@
 import React from 'react';
 
-import SignUp from 'screens/SignUp';
+import Routes from 'components/Routes';
 
 import 'scss/application.scss';
 
 function App() {
-  return <SignUp />;
+  return <Routes />;
 }
 
 export default App;
