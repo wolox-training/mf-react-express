@@ -54,12 +54,13 @@ function SignUp() {
   return (
     <div className={styles.appForm}>
       <img src={logo} className={styles.appLogo} alt={i18next.t('SignUp:logoAlt') as string} />
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} aria-label="signup-form">
         <label className={styles.appLabel}>{i18next.t('SignUp:firstName') as string} </label>
         <input
           type="text"
           className={`${styles.appInput} ${errors.firstName ? styles.error : ''}`}
           name="firstName"
+          aria-label="firstName"
           ref={register({
             required: {
               value: true,
@@ -74,6 +75,7 @@ function SignUp() {
           type="text"
           className={`${styles.appInput} ${errors.lastName ? styles.error : ''}`}
           name="lastName"
+          aria-label="lastName"
           ref={register({
             required: {
               value: true,
@@ -88,6 +90,7 @@ function SignUp() {
           type="email"
           className={`${styles.appInput} ${errors.email ? styles.error : ''}`}
           name="email"
+          aria-label="email"
           ref={register({
             required: {
               value: true,
@@ -102,6 +105,7 @@ function SignUp() {
           type="password"
           className={`${styles.appInput} ${errors.password ? styles.error : ''}`}
           name="password"
+          aria-label="password"
           ref={register({
             required: {
               value: true,
@@ -120,6 +124,7 @@ function SignUp() {
           type="password"
           className={`${styles.appInput} ${errors.passwordConfirmation ? styles.error : ''}`}
           name="passwordConfirmation"
+          aria-label="passwordConfirmation"
           ref={register({
             required: {
               value: true,
