@@ -1,108 +1,83 @@
-/* eslint-disable complexity */
-import React, { useState } from 'react';
-import { FieldError, useForm } from 'react-hook-form';
+import React from 'react';
+import { useForm } from 'react-hook-form';
 import i18next from 'i18next';
 
 import { useLazyRequest } from 'hooks/useRequest';
+import InputCustom from 'components/InputCustom';
 
 import { signUpService } from '../../services/SignUpService';
 
+import { IFormInput } from './constants';
 import logo from './assets/image.png';
 import styles from './styles.module.scss';
 
-interface IFormInput {
-  email: string;
-  firstName: string;
-  lastName: string;
-  password: string;
-  passwordConfirmation?: string;
-}
-
 function SignUp() {
-  const { register, errors, handleSubmit, watch } = useForm<IFormInput>();
+  const { register, errors, handleSubmit, watch } = useForm();
 
-  const [loading, setLoading] = useState(false);
-
-  const [, , error, signUpRequest] = useLazyRequest({
+  const [, loading, error, signUpRequest] = useLazyRequest({
     request: signUpService,
     // TODO this console.log() will be removed when I develop the home screen
     withPostSuccess: response => {
       console.log(response);
-      setLoading(false);
-    },
-    withPostFailure: () => setLoading(false)
+    }
   });
 
   const onSubmit = (values: IFormInput) => {
-    delete values.passwordConfirmation;
-    setLoading(true);
     signUpRequest(values);
-  };
-
-  const handleValidation = (object: FieldError | undefined) => {
-    let t = null;
-    if (object?.type === 'required') {
-      t = <span className={styles.appLabelError}>{object.message}</span>;
-    } else if (object?.type === 'minLength') {
-      t = <span className={styles.appLabelError}>{object.message}</span>;
-    } else if (object?.type === 'validate') {
-      t = <span className={styles.appLabelError}>{object.message}</span>;
-    }
-    return t;
   };
 
   return (
     <div className={styles.appForm}>
       <img src={logo} className={styles.appLogo} alt={i18next.t('SignUp:logoAlt') as string} />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label className={styles.appLabel}>{i18next.t('SignUp:firstName') as string} </label>
-        <input
-          type="text"
-          className={`${styles.appInput} ${errors.firstName ? styles.error : ''}`}
+        <InputCustom
+          label={i18next.t('SignUp:firstName') as string}
           name="firstName"
-          ref={register({
+          inputClassName={errors.firstName ? styles.error : ''}
+          inputType="text"
+          inputRef={register({
             required: {
               value: true,
               message: i18next.t('SignUp:errorFirstName') as string
             }
           })}
+          error={errors?.firstName?.message}
         />
-        {handleValidation(errors.firstName)}
 
-        <label className={styles.appLabel}>{i18next.t('SignUp:lastName') as string} </label>
-        <input
-          type="text"
-          className={`${styles.appInput} ${errors.lastName ? styles.error : ''}`}
+        <InputCustom
+          label={i18next.t('SignUp:lastName') as string}
           name="lastName"
-          ref={register({
+          inputClassName={errors.lastName ? styles.error : ''}
+          inputType="text"
+          inputRef={register({
             required: {
               value: true,
               message: i18next.t('SignUp:errorLastName') as string
             }
           })}
+          error={errors?.lastName?.message}
         />
-        {handleValidation(errors.lastName)}
 
-        <label className={styles.appLabel}>{i18next.t('SignUp:email') as string} </label>
-        <input
-          type="email"
-          className={`${styles.appInput} ${errors.email ? styles.error : ''}`}
+        <InputCustom
+          label={i18next.t('SignUp:email') as string}
           name="email"
-          ref={register({
+          inputClassName={errors.email ? styles.error : ''}
+          inputType="text"
+          inputRef={register({
             required: {
               value: true,
               message: i18next.t('SignUp:errorEmail') as string
             }
           })}
+          error={errors?.email?.message}
         />
-        {handleValidation(errors.email)}
 
-        <label className={styles.appLabel}>{i18next.t('SignUp:password') as string} </label>
-        <input
-          type="password"
-          className={`${styles.appInput} ${errors.password ? styles.error : ''}`}
+        <InputCustom
+          label={i18next.t('SignUp:password') as string}
           name="password"
-          ref={register({
+          inputClassName={errors.password ? styles.error : ''}
+          inputType="password"
+          inputRef={register({
             required: {
               value: true,
               message: i18next.t('SignUp:errorPassword') as string
@@ -112,15 +87,15 @@ function SignUp() {
               message: i18next.t('SignUp:errorPasswordFormat') as string
             }
           })}
+          error={errors?.password?.message}
         />
-        {handleValidation(errors.password)}
 
-        <label className={styles.appLabel}>{i18next.t('SignUp:passwordConfirmation') as string} </label>
-        <input
-          type="password"
-          className={`${styles.appInput} ${errors.passwordConfirmation ? styles.error : ''}`}
+        <InputCustom
+          label={i18next.t('SignUp:passwordConfirmation') as string}
           name="passwordConfirmation"
-          ref={register({
+          inputClassName={errors.passwordConfirmation ? styles.error : ''}
+          inputType="password"
+          inputRef={register({
             required: {
               value: true,
               message: i18next.t('SignUp:errorPasswordConfirmation') as string
@@ -128,8 +103,8 @@ function SignUp() {
             validate: value =>
               value === watch('password') || (i18next.t('SignUp:errorPasswordConfirmationIdem') as string)
           })}
+          error={errors?.passwordConfirmation?.message}
         />
-        {handleValidation(errors.passwordConfirmation)}
 
         <input type="submit" value={i18next.t('SignUp:signUp') as string} className={styles.appSignup} />
 
