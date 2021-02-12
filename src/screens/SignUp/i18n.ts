@@ -29,5 +29,13 @@ i18next.addResources('en', 'SignUp', {
   errorPasswordConfirmationIdem: 'Password do not match',
   errorPasswordFormat: 'The password is too short, must have 6 characters',
   errorSignUp: 'An error append: ',
-  loading: 'Loading...'
+  loading: 'Loading...',
+  email: 'Email',
+  firstName: 'Name',
+  lastName: 'Lastname',
+  login: 'Login',
+  logoAlt: 'Logo',
+  password: 'Password',
+  passwordConfirmation: 'Repeat password',
+  signUp: 'Sign Up'
 });
