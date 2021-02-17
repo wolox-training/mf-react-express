@@ -4,7 +4,7 @@ import i18next from 'i18next';
 
 // import { useLazyRequest } from 'hooks/useRequest';
 
-// import { signUpService } from '../../services/SignUpService';
+// import { loginService } from '../../services/LoginService';
 
 import logo from './assets/image.png';
 import styles from './styles.module.scss';
@@ -17,16 +17,12 @@ interface IFormInput {
 function Login() {
   const { register, errors, handleSubmit } = useForm<IFormInput>();
 
-  // const [loading, setLoading] = useState(false);
-
-  // // const [, , error, signUpRequest] = useLazyRequest({
-  // //   request: signUpService,
+  // const [, loading, error, loginRequest] = useLazyRequest({
+  //   request: loginService,
   //   // TODO this console.log() will be removed when I develop the home screen
   //   withPostSuccess: response => {
   //     console.log(response);
-  //     setLoading(false);
-  //   },
-  //   withPostFailure: () => setLoading(false)
+  //   }
   // });
 
   const onSubmit = (values: IFormInput) => {
