@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 import React, { useState } from 'react';
 import { FieldError, useForm } from 'react-hook-form';
 import i18next from 'i18next';
@@ -147,7 +146,10 @@ function SignUp() {
         {loading && <span className={styles.appHr}>{i18next.t('SignUp:loading') as string}</span>}
 
         <hr className={styles.appHr} />
-        <input type="button" value={i18next.t('SignUp:login') as string} className={styles.appLogin} />
+
+        <a href="/" className={styles.appLogin}>
+          {i18next.t('SignUp:login') as string}
+        </a>
       </form>
     </div>
   );
