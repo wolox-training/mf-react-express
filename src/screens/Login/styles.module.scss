@@ -1,0 +1,73 @@
+@import '../../scss/variables/colors';
+
+%input {
+  border-radius: 4px;
+  border: 1px solid $white;
+  margin: 15px auto;
+  padding: 10px;
+  width: 100%;
+}
+
+.app-form {
+  align-items: center;
+  background-color: $gallery;
+  border-top: 7px solid $cerulean;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 75px auto;
+  max-width: 350px;
+  padding: 10px;
+}
+
+.app-input {
+
+  @extend %input;
+}
+
+.app-hr {
+  margin: 10px 20px;
+}
+
+.app-label {
+  color: $black;
+  font-size: 16px;
+  margin: 0 25px;
+}
+
+.app-label-error {
+  color: $red;
+  display: flex;
+  font-size: 12px;
+  margin: 0 25px 15px;
+}
+
+.app-login {
+
+  @extend %input;
+  background: transparent;
+  border: 2px solid $atlantis;
+  color: $atlantis;
+  font-size: 16px;
+  text-decoration: underline;
+  text-align: center;
+}
+
+.app-logo {
+  background-color: transparent;
+  margin: 75px;
+  max-width: 250px;
+}
+
+.app-signup {
+
+  @extend %input;
+  background: $atlantis;
+  border: 2px solid $atlantis;
+  color: $white;
+  font-size: 16px;
+}
+
+.error {
+  border: 2px solid $red;
+}
