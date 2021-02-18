@@ -1,5 +1,5 @@
 import api from '../config/api';
-import { IFormInput } from '../screens/SignUp/constants';
+import { IFormInput } from '../screens/SignUp/types';
 
 api.setBaseURL('https://books-training-rails.herokuapp.com');
 
