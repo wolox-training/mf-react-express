@@ -4,10 +4,11 @@ import i18next from 'i18next';
 
 import { useLazyRequest } from 'hooks/useRequest';
 import InputCustom from 'components/InputCustom';
+import Loading from 'components/Loading';
 
 import { signUpService } from '../../services/SignUpService';
 
-import { IFormInput } from './constants';
+import { IFormInput } from './types';
 import logo from './assets/image.png';
 import styles from './styles.module.scss';
 
@@ -114,7 +115,7 @@ function SignUp() {
           </span>
         )}
 
-        {loading && <span className={styles.appHr}>{i18next.t('SignUp:loading') as string}</span>}
+        <Loading loading={loading} />
 
         <hr className={styles.appHr} />
         <input type="button" value={i18next.t('SignUp:login') as string} className={styles.appLogin} />
