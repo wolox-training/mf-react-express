@@ -15,7 +15,13 @@ function InputCustom({ error, label, inputClassName, inputRef, inputType, name }
   return (
     <>
       <label className={styles.appLabel}>{label} </label>
-      <input type={inputType} className={`${styles.appInput} ${inputClassName}`} name={name} ref={inputRef} />
+      <input
+        type={inputType}
+        className={`${styles.appInput} ${inputClassName}`}
+        name={name}
+        aria-label={name}
+        ref={inputRef}
+      />
       {error && <span className={styles.appLabelError}>{error}</span>}
     </>
   );

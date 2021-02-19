@@ -20,19 +20,8 @@
   padding: 10px;
 }
 
-.app-input {
-
-  @extend %input;
-}
-
 .app-hr {
   margin: 10px 20px;
-}
-
-.app-label {
-  color: $black;
-  font-size: 16px;
-  margin: 0 25px;
 }
 
 .app-label-error {

@@ -4,29 +4,26 @@ import i18next from 'i18next';
 
 import { useLazyRequest } from 'hooks/useRequest';
 import InputCustom from 'components/InputCustom';
+import Loading from 'components/Loading';
 
 import { loginService } from '../../services/LoginService';
 
 import logo from './assets/image.png';
 import styles from './styles.module.scss';
-
-interface IFormInput {
-  email: string;
-  password: string;
-}
+import { IFormInputLogin } from './types';
 
 function Login() {
-  const { register, errors, handleSubmit } = useForm<IFormInput>();
+  const { register, errors, handleSubmit } = useForm<IFormInputLogin>();
 
-  const [, , error, loginRequest] = useLazyRequest({
+  const [, loading, error, loginRequest] = useLazyRequest({
     request: loginService,
     // TODO this console.log() will be removed when I develop the home screen
     withPostSuccess: response => {
-      console.log(response);
+      console.log(response.data);
     }
   });
 
-  const onSubmit = (values: IFormInput) => {
+  const onSubmit = (values: IFormInputLogin) => {
     loginRequest(values);
   };
 
@@ -69,6 +66,8 @@ function Login() {
         <input type="submit" value={i18next.t('Login:login') as string} className={styles.appSignup} />
 
         {error && <span className={styles.appLabelError}>{i18next.t('Login:errorLogin') as string}</span>}
+
+        <Loading loading={loading} />
 
         <hr className={styles.appHr} />
 

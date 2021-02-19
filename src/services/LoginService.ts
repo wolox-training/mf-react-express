@@ -1,10 +1,7 @@
+import { IFormInputLogin } from 'screens/Login/types';
+
 import api from '../config/api';
 
-api.setBaseURL('http://polls.apiblueprint.org');
+api.setBaseURL('https://books-training-rails.herokuapp.com');
 
-export interface IFormInput {
-  email: string;
-  password: string;
-}
-
-export const loginService = (value: IFormInput) => api.post('/api/v1/users/sessions', value);
+export const loginService = (value: IFormInputLogin) => api.post('/api/v1/users/sign_in', value);
