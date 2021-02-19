@@ -22,5 +22,5 @@ test('shows Login screen when being on the login path', async () => {
       <Routes />
     </MemoryRouter>
   );
-  await waitFor(() => expect(screen.getByText('Login')).toBeInTheDocument());
+  await waitFor(() => expect(screen.getByText('Login:email')).toBeInTheDocument());
 });

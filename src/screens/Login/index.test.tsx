@@ -10,7 +10,7 @@ describe('<Login />', () => {
     password: '123123'
   };
 
-  it('shows the incomplete error message when required fields are empty and form is submitted', async () => {
+  it('shows incomplete error message when required fields are empty and form is submitted', async () => {
     render(<Login />);
 
     userEvent.click(screen.getByRole('button', { name: /Login:login/i }));
@@ -18,18 +18,16 @@ describe('<Login />', () => {
     expect(await screen.findAllByText('Login:error'));
   });
 
-  it('shows the incorrect credentials message when fields are incorrect and form is submitted', async () => {
+  it('shows error message when filling invalid email and no password and form is submitted', async () => {
     render(<Login />);
 
     const email = screen.getByLabelText('email');
-    const password = screen.getByLabelText('password');
 
-    userEvent.type(email, validValues.email);
-    userEvent.type(password, '123456');
+    userEvent.type(email, 'test"error.com');
 
     userEvent.click(screen.getByRole('button', { name: /Login:login/i }));
 
-    expect(await screen.findByText('Login:errorLogin')).toBeInTheDocument();
+    expect(await screen.findByText('Login:error')).toBeInTheDocument();
   });
 
   it('shows the email error message when the email format is not correct and form is submitted', async () => {
