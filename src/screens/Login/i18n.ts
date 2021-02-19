@@ -3,7 +3,7 @@ import i18next from 'i18next';
 i18next.addResources('es', 'Login', {
   email: 'Email',
   error: 'Hay campos incompletos',
-  errorPasswordFormat: 'El formato del mail no es correcto',
+  errorEmailFormat: 'El formato del mail no es correcto',
   errorLogin: 'Credenciales incorrectas',
   loading: 'Cargando...',
   login: 'Login',
@@ -15,7 +15,7 @@ i18next.addResources('es', 'Login', {
 i18next.addResources('en', 'Login', {
   email: 'Email',
   error: 'There are incomplete fields',
-  errorPasswordFormat: 'The mail format is not correct',
+  errorEmailFormat: 'The mail format is not correct',
   errorLogin: 'Incorrect credentials',
   loading: 'Loading...',
   login: 'Login',
