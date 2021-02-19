@@ -30,7 +30,7 @@ function SignUp() {
   return (
     <div className={styles.appForm}>
       <img src={logo} className={styles.appLogo} alt={i18next.t('SignUp:logoAlt') as string} />
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(onSubmit)} aria-label="signup-form">
         <InputCustom
           label={i18next.t('SignUp:firstName') as string}
           name="firstName"
