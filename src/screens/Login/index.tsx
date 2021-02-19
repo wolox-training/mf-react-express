@@ -30,7 +30,7 @@ function Login() {
   return (
     <div className={styles.appForm}>
       <img src={logo} className={styles.appLogo} alt={i18next.t('Login:logoAlt') as string} />
-      <form onSubmit={handleSubmit(onSubmit)} aria-label="signup-form">
+      <form onSubmit={handleSubmit(onSubmit)}>
         <InputCustom
           label={i18next.t('Login:email') as string}
           name="email"
