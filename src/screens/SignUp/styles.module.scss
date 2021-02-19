@@ -20,19 +20,15 @@
   padding: 10px;
 }
 
-.app-input {
-
-  @extend %input;
-}
-
 .app-hr {
   margin: 10px 20px;
 }
 
-.app-label {
-  color: $black;
-  font-size: 16px;
-  margin: 0 20px;
+.app-label-error {
+  color: $red;
+  display: flex;
+  font-size: 12px;
+  margin: 0 25px 15px;
 }
 
 .app-login {
@@ -58,4 +54,8 @@
   border: 2px solid $atlantis;
   color: $white;
   font-size: 16px;
+}
+
+.error {
+  border: 2px solid $red;
 }

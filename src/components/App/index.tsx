@@ -1,7 +1,8 @@
 import React from 'react';
 
-import 'scss/application.scss';
 import SignUp from 'screens/SignUp';
+
+import 'scss/application.scss';
 
 function App() {
   return <SignUp />;
