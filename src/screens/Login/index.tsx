@@ -17,9 +17,9 @@ function Login() {
 
   const [, loading, error, loginRequest] = useLazyRequest({
     request: loginService,
-    // TODO this console.log() will be removed when I develop the home screen
     withPostSuccess: response => {
-      console.log(response.data);
+      localStorage.setItem('accessToken', response.data.id);
+      window.location.href = '/home';
     }
   });
 

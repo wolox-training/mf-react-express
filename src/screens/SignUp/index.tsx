@@ -17,9 +17,8 @@ function SignUp() {
 
   const [, loading, error, signUpRequest] = useLazyRequest({
     request: signUpService,
-    // TODO this console.log() will be removed when I develop the home screen
-    withPostSuccess: response => {
-      console.log(response);
+    withPostSuccess: () => {
+      window.location.href = '/';
     }
   });
 
