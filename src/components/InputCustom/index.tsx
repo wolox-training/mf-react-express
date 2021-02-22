@@ -14,8 +14,14 @@ interface Props {
 function InputCustom({ error, label, inputClassName, inputRef, inputType, name }: Props) {
   return (
     <>
-      <label className={styles.appLabel}>{label} </label>
-      <input type={inputType} className={`${styles.appInput} ${inputClassName}`} name={name} ref={inputRef} />
+      <label className={styles.appLabel}>{label}</label>
+      <input
+        type={inputType}
+        className={`${styles.appInput} ${inputClassName}`}
+        name={name}
+        aria-label={name}
+        ref={inputRef}
+      />
       {error && <span className={styles.appLabelError}>{error}</span>}
     </>
   );
