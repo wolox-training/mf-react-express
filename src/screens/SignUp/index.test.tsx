@@ -1,10 +1,10 @@
-import { fireEvent, render, screen, waitFor } from '@testing-library/react';
-import i18next from 'i18next';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 import React from 'react';
 
 import SignUp from './index';
 
-describe('#SignUp', () => {
+describe('<SignUp />', () => {
   const validValues = {
     firstName: 'Manuela',
     lastName: 'Fernandez',
@@ -12,101 +12,91 @@ describe('#SignUp', () => {
     password: '123123'
   };
 
-  describe('when required fields are empty and form is submitted', () => {
-    it('shows the required message for each required field', async () => {
-      render(<SignUp />);
+  it('shows the required message for each required field when required fields are empty and form is submitted', async () => {
+    render(<SignUp />);
 
-      const firstName = screen.getByLabelText('firstName');
-      const lastName = screen.getByLabelText('lastName');
-      const email = screen.getByLabelText('email');
-      const password = screen.getByLabelText('password');
-      const passwordConfirmation = screen.getByLabelText('passwordConfirmation');
-      const form = screen.getByRole('form', { name: 'signup-form' });
+    userEvent.click(screen.getByRole('button', { name: /SignUp:signUp/i }));
 
-      // eslint-disable-next-line max-nested-callbacks
-      await waitFor(() => fireEvent.submit(form));
-
-      expect(firstName.parentElement?.innerHTML).toMatch(`${i18next.t('SignUp:errorFirstName') as string}`);
-      expect(lastName.parentElement?.innerHTML).toMatch(`${i18next.t('SignUp:errorLastName') as string}`);
-      expect(email.parentElement?.innerHTML).toMatch(`${i18next.t('SignUp:errorEmail') as string}`);
-      expect(password.parentElement?.innerHTML).toMatch(`${i18next.t('SignUp:errorPassword') as string}`);
-      expect(passwordConfirmation.parentElement?.innerHTML).toMatch(
-        `${i18next.t('SignUp:errorPasswordConfirmation') as string}`
-      );
-    });
+    expect(await screen.findByText('SignUp:errorFirstName')).toBeInTheDocument();
+    expect(await screen.findByText('SignUp:errorLastName')).toBeInTheDocument();
+    expect(await screen.findByText('SignUp:errorEmail')).toBeInTheDocument();
+    expect(await screen.findByText('SignUp:errorPassword')).toBeInTheDocument();
+    expect(await screen.findByText('SignUp:errorPasswordConfirmation')).toBeInTheDocument();
   });
 
-  describe('when password length is too short and form is submitted', () => {
-    it('shows the password error', async () => {
-      render(<SignUp />);
+  it('shows the first name error message when first name field is empty and form is submitted', async () => {
+    render(<SignUp />);
 
-      const firstName = screen.getByLabelText('firstName');
-      const lastName = screen.getByLabelText('lastName');
-      const email = screen.getByLabelText('email');
-      const password = screen.getByLabelText('password');
-      const passwordConfirmation = screen.getByLabelText('passwordConfirmation');
-      const form = screen.getByRole('form', { name: 'signup-form' });
+    const lastName = screen.getByLabelText('lastName');
+    const email = screen.getByLabelText('email');
+    const password = screen.getByLabelText('password');
+    const passwordConfirmation = screen.getByLabelText('passwordConfirmation');
 
-      fireEvent.change(firstName, { target: { value: validValues.firstName } });
-      fireEvent.change(lastName, { target: { value: validValues.lastName } });
-      fireEvent.change(email, { target: { value: validValues.email } });
-      fireEvent.change(password, { target: { value: '123' } });
-      fireEvent.change(passwordConfirmation, { target: { value: '123' } });
+    userEvent.type(lastName, validValues.lastName);
+    userEvent.type(email, validValues.email);
+    userEvent.type(password, validValues.password);
+    userEvent.type(passwordConfirmation, validValues.password);
 
-      // eslint-disable-next-line max-nested-callbacks
-      await waitFor(() => fireEvent.submit(form));
+    userEvent.click(screen.getByRole('button', { name: /SignUp:signUp/i }));
 
-      expect(password.parentElement?.innerHTML).toMatch(
-        `${i18next.t('SignUp:errorPasswordFormat') as string}`
-      );
-    });
+    expect(await screen.findByText('SignUp:errorFirstName')).toBeInTheDocument();
   });
 
-  describe('when password confirmation does not match password and form is submitted', () => {
-    it('shows the password confirmation error', async () => {
-      render(<SignUp />);
+  it('shows the password error message when password length is too short and form is submitted', async () => {
+    render(<SignUp />);
 
-      const firstName = screen.getByLabelText('firstName');
-      const lastName = screen.getByLabelText('lastName');
-      const email = screen.getByLabelText('email');
-      const password = screen.getByLabelText('password');
-      const passwordConfirmation = screen.getByLabelText('passwordConfirmation');
-      const form = screen.getByRole('form', { name: 'signup-form' });
+    const firstName = screen.getByLabelText('firstName');
+    const lastName = screen.getByLabelText('lastName');
+    const email = screen.getByLabelText('email');
+    const password = screen.getByLabelText('password');
+    const passwordConfirmation = screen.getByLabelText('passwordConfirmation');
 
-      fireEvent.change(firstName, { target: { value: validValues.firstName } });
-      fireEvent.change(lastName, { target: { value: validValues.lastName } });
-      fireEvent.change(email, { target: { value: validValues.email } });
-      fireEvent.change(password, { target: { value: validValues.password } });
-      fireEvent.change(passwordConfirmation, { target: { value: '123' } });
+    userEvent.type(firstName, validValues.firstName);
+    userEvent.type(lastName, validValues.lastName);
+    userEvent.type(email, validValues.email);
+    userEvent.type(password, '123');
+    userEvent.type(passwordConfirmation, '123');
 
-      // eslint-disable-next-line max-nested-callbacks
-      await waitFor(() => fireEvent.submit(form));
+    userEvent.click(screen.getByRole('button', { name: /SignUp:signUp/i }));
 
-      expect(passwordConfirmation.parentElement?.innerHTML).toMatch(
-        `${i18next.t('SignUp:errorPasswordConfirmationIdem') as string}`
-      );
-    });
+    expect(await screen.findByText('SignUp:errorPasswordFormat')).toBeInTheDocument();
   });
 
-  describe('when required fields are valid and form is submitted', () => {
-    it('sign up successfully', async () => {
-      render(<SignUp />);
+  it('shows the password confirmation error message when password confirmation does not match password and form is submitted', async () => {
+    render(<SignUp />);
 
-      const firstName = screen.getByLabelText('firstName');
-      const lastName = screen.getByLabelText('lastName');
-      const email = screen.getByLabelText('email');
-      const password = screen.getByLabelText('password');
-      const passwordConfirmation = screen.getByLabelText('passwordConfirmation');
-      const form = screen.getByRole('form', { name: 'signup-form' });
+    const firstName = screen.getByLabelText('firstName');
+    const lastName = screen.getByLabelText('lastName');
+    const email = screen.getByLabelText('email');
+    const password = screen.getByLabelText('password');
+    const passwordConfirmation = screen.getByLabelText('passwordConfirmation');
 
-      fireEvent.change(firstName, { target: { value: validValues.firstName } });
-      fireEvent.change(lastName, { target: { value: validValues.lastName } });
-      fireEvent.change(email, { target: { value: validValues.email } });
-      fireEvent.change(password, { target: { value: validValues.password } });
-      fireEvent.change(passwordConfirmation, { target: { value: validValues.password } });
+    userEvent.type(firstName, validValues.firstName);
+    userEvent.type(lastName, validValues.lastName);
+    userEvent.type(email, validValues.email);
+    userEvent.type(password, validValues.password);
+    userEvent.type(passwordConfirmation, '123');
 
-      // eslint-disable-next-line max-nested-callbacks
-      await waitFor(() => fireEvent.submit(form));
-    });
+    userEvent.click(screen.getByRole('button', { name: /SignUp:signUp/i }));
+
+    expect(await screen.findByText('SignUp:errorPasswordConfirmationIdem')).toBeInTheDocument();
+  });
+
+  it('sign up successfully when required fields are valid and form is submitted', () => {
+    render(<SignUp />);
+
+    const firstName = screen.getByLabelText('firstName');
+    const lastName = screen.getByLabelText('lastName');
+    const email = screen.getByLabelText('email');
+    const password = screen.getByLabelText('password');
+    const passwordConfirmation = screen.getByLabelText('passwordConfirmation');
+
+    userEvent.type(firstName, validValues.firstName);
+    userEvent.type(lastName, validValues.lastName);
+    userEvent.type(email, validValues.email);
+    userEvent.type(password, validValues.password);
+    userEvent.type(passwordConfirmation, validValues.password);
+
+    userEvent.click(screen.getByRole('button', { name: /SignUp:signUp/i }));
   });
 });
