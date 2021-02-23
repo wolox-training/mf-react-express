@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useForm } from 'react-hook-form';
 import i18next from 'i18next';
 
@@ -75,6 +76,7 @@ function Login() {
           {i18next.t('Login:signUp') as string}
         </a>
       </form>
+
     </div>
   );
 }
