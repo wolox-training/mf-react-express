@@ -1,4 +1,4 @@
-@import '../../scss/variables/colors';
+@import './variables/colors';
 
 %input {
   border-radius: 4px;
@@ -8,7 +8,16 @@
   width: 100%;
 }
 
-.app-form {
+.style-button {
+
+  @extend %input;
+  background: $atlantis;
+  border: 2px solid $atlantis;
+  color: $white;
+  font-size: 16px;
+}
+
+.style-form {
   align-items: center;
   background-color: $gallery;
   border-top: 7px solid $cerulean;
@@ -20,43 +29,30 @@
   padding: 10px;
 }
 
-.app-hr {
+.style-hr {
   margin: 10px 20px;
 }
 
-.app-label-error {
+.style-label-error {
   color: $red;
   display: flex;
   font-size: 12px;
   margin: 0 25px 15px;
 }
 
-.app-login {
+.style-link {
 
   @extend %input;
   background: transparent;
   border: 2px solid $atlantis;
   color: $atlantis;
   font-size: 16px;
-  text-decoration: underline;
   text-align: center;
+  text-decoration: underline;
 }
 
-.app-logo {
+.style-logo {
   background-color: transparent;
   margin: 75px;
   max-width: 250px;
-}
-
-.app-signup {
-
-  @extend %input;
-  background: $atlantis;
-  border: 2px solid $atlantis;
-  color: $white;
-  font-size: 16px;
-}
-
-.error {
-  border: 2px solid $red;
 }
