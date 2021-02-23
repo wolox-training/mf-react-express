@@ -1,16 +1,17 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import i18next from 'i18next';
+import { Link } from 'react-router-dom';
 
 import { useLazyRequest } from 'hooks/useRequest';
 import InputCustom from 'components/InputCustom';
 import Loading from 'components/Loading';
 
 import { signUpService } from '../../services/SignUpService';
+import styles from '../../scss/styles.module.scss';
 
 import { IFormInput } from './types';
 import logo from './assets/image.png';
-import styles from './styles.module.scss';
 
 function SignUp() {
   const { register, errors, handleSubmit, watch } = useForm();
@@ -28,13 +29,12 @@ function SignUp() {
   };
 
   return (
-    <div className={styles.appForm}>
-      <img src={logo} className={styles.appLogo} alt={i18next.t('SignUp:logoAlt') as string} />
-      <form onSubmit={handleSubmit(onSubmit)} aria-label="signup-form">
+    <div className={styles.styleForm}>
+      <img src={logo} className={styles.styleLogo} alt={i18next.t('SignUp:logoAlt') as string} />
+      <form aria-label="signup-form">
         <InputCustom
           label={i18next.t('SignUp:firstName') as string}
           name="firstName"
-          inputClassName={errors.firstName ? styles.error : ''}
           inputType="text"
           inputRef={register({
             required: {
@@ -48,7 +48,6 @@ function SignUp() {
         <InputCustom
           label={i18next.t('SignUp:lastName') as string}
           name="lastName"
-          inputClassName={errors.lastName ? styles.error : ''}
           inputType="text"
           inputRef={register({
             required: {
@@ -62,7 +61,6 @@ function SignUp() {
         <InputCustom
           label={i18next.t('SignUp:email') as string}
           name="email"
-          inputClassName={errors.email ? styles.error : ''}
           inputType="text"
           inputRef={register({
             required: {
@@ -76,7 +74,6 @@ function SignUp() {
         <InputCustom
           label={i18next.t('SignUp:password') as string}
           name="password"
-          inputClassName={errors.password ? styles.error : ''}
           inputType="password"
           inputRef={register({
             required: {
@@ -94,7 +91,6 @@ function SignUp() {
         <InputCustom
           label={i18next.t('SignUp:passwordConfirmation') as string}
           name="passwordConfirmation"
-          inputClassName={errors.passwordConfirmation ? styles.error : ''}
           inputType="password"
           inputRef={register({
             required: {
@@ -107,21 +103,23 @@ function SignUp() {
           error={errors?.passwordConfirmation?.message}
         />
 
-        <input type="submit" value={i18next.t('SignUp:signUp') as string} className={styles.appSignup} />
+        <button type="button" className={styles.styleButton} onClick={handleSubmit(onSubmit)}>
+          {i18next.t('SignUp:signUp') as string}
+        </button>
 
         {error && (
-          <span className={styles.appLabelError}>
+          <span className={styles.styleLabelError}>
             {i18next.t('SignUp:errorSignUp') as string} {error.problem}
           </span>
         )}
 
         <Loading loading={loading} />
 
-        <hr className={styles.appHr} />
+        <hr className={styles.styleHr} />
 
-        <a href="/" className={styles.appLogin}>
+        <Link to="/" className={styles.styleLink}>
           {i18next.t('SignUp:login') as string}
-        </a>
+        </Link>
       </form>
     </div>
   );

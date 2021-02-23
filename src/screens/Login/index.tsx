@@ -1,15 +1,16 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import i18next from 'i18next';
+import { Link } from 'react-router-dom';
 
 import { useLazyRequest } from 'hooks/useRequest';
 import InputCustom from 'components/InputCustom';
 import Loading from 'components/Loading';
 
 import { loginService } from '../../services/LoginService';
+import styles from '../../scss/styles.module.scss';
 
 import logo from './assets/image.png';
-import styles from './styles.module.scss';
 import { IFormInputLogin } from './types';
 
 function Login() {
@@ -28,13 +29,12 @@ function Login() {
   };
 
   return (
-    <div className={styles.appForm}>
-      <img src={logo} className={styles.appLogo} alt={i18next.t('Login:logoAlt') as string} />
-      <form onSubmit={handleSubmit(onSubmit)} aria-label="login-form">
+    <div className={styles.styleForm}>
+      <img src={logo} className={styles.styleLogo} alt={i18next.t('Login:logoAlt') as string} />
+      <form aria-label="login-form">
         <InputCustom
           label={i18next.t('Login:email') as string}
           name="email"
-          inputClassName={errors.email ? styles.error : ''}
           inputType="text"
           inputRef={register({
             required: {
@@ -52,7 +52,6 @@ function Login() {
         <InputCustom
           label={i18next.t('Login:password') as string}
           name="password"
-          inputClassName={errors.password ? styles.error : ''}
           inputType="password"
           inputRef={register({
             required: {
@@ -63,17 +62,19 @@ function Login() {
           error={errors?.password?.message}
         />
 
-        <input type="submit" value={i18next.t('Login:login') as string} className={styles.appSignup} />
+        <button type="button" className={styles.styleButton} onClick={handleSubmit(onSubmit)}>
+          {i18next.t('Login:login') as string}
+        </button>
 
-        {error && <span className={styles.appLabelError}>{i18next.t('Login:errorLogin') as string}</span>}
+        {error && <span className={styles.styleLabelError}>{i18next.t('Login:errorLogin') as string}</span>}
 
         <Loading loading={loading} />
 
-        <hr className={styles.appHr} />
+        <hr className={styles.styleHr} />
 
-        <a href="/sign_up" className={styles.appLogin}>
+        <Link to="/sign_up" className={styles.styleLink}>
           {i18next.t('Login:signUp') as string}
-        </a>
+        </Link>
       </form>
     </div>
   );
