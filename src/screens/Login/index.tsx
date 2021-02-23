@@ -1,5 +1,4 @@
 import React from 'react';
-
 import { useForm } from 'react-hook-form';
 import i18next from 'i18next';
 import { Link } from 'react-router-dom';
@@ -9,7 +8,7 @@ import InputCustom from 'components/InputCustom';
 import Loading from 'components/Loading';
 
 import { loginService } from '../../services/LoginService';
-import styles from '../../scss/styles.module.scss';
+import styles from '../SignUp/styles.module.scss';
 
 import logo from './assets/image.png';
 import { IFormInputLogin } from './types';
@@ -30,8 +29,8 @@ function Login() {
   };
 
   return (
-    <div className={styles.styleForm}>
-      <img src={logo} className={styles.styleLogo} alt={i18next.t('Login:logoAlt') as string} />
+    <div className={styles.appForm}>
+      <img src={logo} className={styles.appLogo} alt={i18next.t('Login:logoAlt') as string} />
       <form aria-label="login-form">
         <InputCustom
           label={i18next.t('Login:email') as string}
@@ -63,21 +62,20 @@ function Login() {
           error={errors?.password?.message}
         />
 
-        <button type="button" className={styles.styleButton} onClick={handleSubmit(onSubmit)}>
+        <button type="button" className={styles.appButton} onClick={handleSubmit(onSubmit)}>
           {i18next.t('Login:login') as string}
         </button>
 
-        {error && <span className={styles.styleLabelError}>{i18next.t('Login:errorLogin') as string}</span>}
+        {error && <span className={styles.appLabelError}>{i18next.t('Login:errorLogin') as string}</span>}
 
         <Loading loading={loading} />
 
-        <hr className={styles.styleHr} />
+        <hr className={styles.appHr} />
 
-        <Link to="/sign_up" className={styles.styleLink}>
+        <Link to="/sign_up" className={styles.appLink}>
           {i18next.t('Login:signUp') as string}
         </Link>
       </form>
-
     </div>
   );
 }

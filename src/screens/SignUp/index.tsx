@@ -8,8 +8,8 @@ import InputCustom from 'components/InputCustom';
 import Loading from 'components/Loading';
 
 import { signUpService } from '../../services/SignUpService';
-import styles from '../../scss/styles.module.scss';
 
+import styles from './styles.module.scss';
 import { IFormInput } from './types';
 import logo from './assets/image.png';
 
@@ -29,8 +29,8 @@ function SignUp() {
   };
 
   return (
-    <div className={styles.styleForm}>
-      <img src={logo} className={styles.styleLogo} alt={i18next.t('SignUp:logoAlt') as string} />
+    <div className={styles.appForm}>
+      <img src={logo} className={styles.appLogo} alt={i18next.t('SignUp:logoAlt') as string} />
       <form aria-label="signup-form">
         <InputCustom
           label={i18next.t('SignUp:firstName') as string}
@@ -103,21 +103,21 @@ function SignUp() {
           error={errors?.passwordConfirmation?.message}
         />
 
-        <button type="button" className={styles.styleButton} onClick={handleSubmit(onSubmit)}>
+        <button type="button" className={styles.appButton} onClick={handleSubmit(onSubmit)}>
           {i18next.t('SignUp:signUp') as string}
         </button>
 
         {error && (
-          <span className={styles.styleLabelError}>
+          <span className={styles.appLabelError}>
             {i18next.t('SignUp:errorSignUp') as string} {error.problem}
           </span>
         )}
 
         <Loading loading={loading} />
 
-        <hr className={styles.styleHr} />
+        <hr className={styles.appHr} />
 
-        <Link to="/" className={styles.styleLink}>
+        <Link to="/" className={styles.appLink}>
           {i18next.t('SignUp:login') as string}
         </Link>
       </form>

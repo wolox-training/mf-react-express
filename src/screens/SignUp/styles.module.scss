@@ -1,4 +1,4 @@
-@import './variables/colors';
+@import '../../scss/variables/colors';
 
 %input {
   border-radius: 4px;
@@ -8,7 +8,7 @@
   width: 100%;
 }
 
-.style-button {
+.app-button {
 
   @extend %input;
   background: $atlantis;
@@ -17,7 +17,7 @@
   font-size: 16px;
 }
 
-.style-form {
+.app-form {
   align-items: center;
   background-color: $gallery;
   border-top: 7px solid $cerulean;
@@ -29,18 +29,18 @@
   padding: 10px;
 }
 
-.style-hr {
+.app-hr {
   margin: 10px 20px;
 }
 
-.style-label-error {
+.app-label-error {
   color: $red;
   display: flex;
   font-size: 12px;
   margin: 0 25px 15px;
 }
 
-.style-link {
+.app-link {
 
   @extend %input;
   background: transparent;
@@ -51,7 +51,7 @@
   text-decoration: underline;
 }
 
-.style-logo {
+.app-logo {
   background-color: transparent;
   margin: 75px;
   max-width: 250px;
