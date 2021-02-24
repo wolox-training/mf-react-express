@@ -8,6 +8,15 @@
   width: 100%;
 }
 
+.app-button {
+
+  @extend %input;
+  background: $atlantis;
+  border: 2px solid $atlantis;
+  color: $white;
+  font-size: 16px;
+}
+
 .app-form {
   align-items: center;
   background-color: $gallery;
@@ -31,13 +40,14 @@
   margin: 0 25px 15px;
 }
 
-.app-login {
+.app-link {
 
   @extend %input;
   background: transparent;
   border: 2px solid $atlantis;
   color: $atlantis;
   font-size: 16px;
+  text-align: center;
   text-decoration: underline;
   text-align: center;
 }
@@ -46,17 +56,4 @@
   background-color: transparent;
   margin: 75px;
   max-width: 250px;
-}
-
-.app-signup {
-
-  @extend %input;
-  background: $atlantis;
-  border: 2px solid $atlantis;
-  color: $white;
-  font-size: 16px;
-}
-
-.error {
-  border: 2px solid $red;
 }

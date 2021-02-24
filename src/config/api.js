@@ -22,6 +22,8 @@ const api = create({
   timeout: 15000
 });
 
+api.setBaseURL('https://books-training-rails.herokuapp.com');
+
 api.addRequestTransform(request => {
   if (request.params) {
     request.params = serializer.serialize(request.params);
