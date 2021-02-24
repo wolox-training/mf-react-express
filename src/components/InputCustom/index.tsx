@@ -5,7 +5,6 @@ import styles from './styles.module.scss';
 interface Props {
   error?: string;
   label: React.ReactNode;
-  inputClassName?: string;
   inputRef: any;
   inputType: string;
   name: string;

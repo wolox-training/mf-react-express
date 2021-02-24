@@ -8,6 +8,7 @@ import InputCustom from 'components/InputCustom';
 import Loading from 'components/Loading';
 
 import { signUpService } from '../../services/SignUpService';
+import paths from '../../components/Routes/paths';
 
 import styles from './styles.module.scss';
 import { IFormInput } from './types';
@@ -115,8 +116,8 @@ function SignUp() {
         <Loading loading={loading} />
 
         <hr className={styles.appHr} />
-        
-        <Link to="/" className={styles.appLink}>
+
+        <Link to={paths.login} className={styles.appLink}>
           {i18next.t('SignUp:login') as string}
         </Link>
       </form>
