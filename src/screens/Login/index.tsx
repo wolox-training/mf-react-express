@@ -18,9 +18,10 @@ function Login() {
 
   const [, loading, error, loginRequest] = useLazyRequest({
     request: loginService,
-    withPostSuccess: response => {
-      localStorage.setItem('accessToken', response.data.id);
-      window.location.href = '/home';
+    withPostFetch: (response: Response) => {
+      console.log(response);
+      // localStorage.setItem('accessToken', response.headers);
+      // window.location.href = '/home';
     }
   });
 
