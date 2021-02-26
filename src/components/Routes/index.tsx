@@ -4,17 +4,17 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import SignUp from 'screens/SignUp';
 import Login from 'screens/Login';
 import Home from 'screens/Home';
+import LocalStorageService from 'services/LocalStorageService';
 
 function Routes() {
-  const token = localStorage.getItem('accessToken');
-  const login = token !== null;
+  const token = LocalStorageService.getValue('accessToken');
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Login} />
         <Route path="/sign_up" component={SignUp} />
-        <Route path="/home" render={() => (login ? <Home /> : <Redirect to="/" />)} />
+        <Route path="/home" render={() => (token ? <Home /> : <Redirect to="/" />)} />
       </Switch>
     </BrowserRouter>
   );

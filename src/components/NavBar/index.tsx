@@ -1,12 +1,14 @@
 import React from 'react';
 import i18next from 'i18next';
 
+import { removeCurrentUser } from 'services/CurrentUserService';
+
 import logo from './assets/image.png';
 import styles from './styles.module.scss';
 
 function NavBar() {
   const handleLogout = () => {
-    localStorage.clear();
+    removeCurrentUser();
     window.location.href = '/';
   };
 
