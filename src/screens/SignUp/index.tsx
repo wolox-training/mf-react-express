@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import i18next from 'i18next';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useLazyRequest } from 'hooks/useRequest';
 import InputCustom from 'components/InputCustom';
@@ -16,11 +16,12 @@ import logo from './assets/image.png';
 
 function SignUp() {
   const { register, errors, handleSubmit, watch } = useForm();
+  const history = useHistory();
 
   const [, loading, error, signUpRequest] = useLazyRequest({
     request: signUpService,
     withPostSuccess: () => {
-      window.location.href = '/';
+      history.push(paths.login);
     }
   });
 
