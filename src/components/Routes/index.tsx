@@ -9,14 +9,13 @@ import paths from './paths';
 
 function Routes() {
   const token = localStorage.getItem('accessToken');
-  const login = token !== null;
 
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path={paths.login} component={Login} />
         <Route path={paths.signUp} component={SignUp} />
-        <Route path={paths.home} render={() => (login ? <Home /> : <Redirect to={paths.login} />)} />
+        <Route path={paths.home} render={() => (token ? <Home /> : <Redirect to={paths.login} />)} />
       </Switch>
     </BrowserRouter>
   );
