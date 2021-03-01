@@ -9,6 +9,7 @@ import Loading from 'components/Loading';
 import { UserResponse } from 'config/types';
 import { setCurrentUser } from 'services/CurrentUserService';
 import { loginService } from 'services/LoginService';
+import { actionCreators, useDispatch } from 'contexts/reducer';
 
 import styles from '../SignUp/styles.module.scss';
 
@@ -16,6 +17,8 @@ import logo from './assets/image.png';
 import { IFormInputLogin } from './types';
 
 function Login() {
+  const dispatch = useDispatch();
+
   const { register, errors, handleSubmit } = useForm<IFormInputLogin>();
 
   const [, loading, error, loginRequest] = useLazyRequest({
@@ -27,6 +30,7 @@ function Login() {
         client,
         uid
       });
+      dispatch(actionCreators.setSession(response.headers['access-token'], client, uid));
       window.location.href = '/home';
     }
   });

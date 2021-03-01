@@ -2,13 +2,17 @@ import React from 'react';
 import i18next from 'i18next';
 
 import { removeCurrentUser } from 'services/CurrentUserService';
+import { actionCreators, useDispatch } from 'contexts/reducer';
 
 import logo from './assets/image.png';
 import styles from './styles.module.scss';
 
 function NavBar() {
+  const dispatch = useDispatch();
+
   const handleLogout = () => {
     removeCurrentUser();
+    dispatch(actionCreators.closeSession());
     window.location.href = '/';
   };
 
