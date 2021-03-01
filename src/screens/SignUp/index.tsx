@@ -1,13 +1,14 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import i18next from 'i18next';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useLazyRequest } from 'hooks/useRequest';
 import InputCustom from 'components/InputCustom';
 import Loading from 'components/Loading';
 
 import { signUpService } from '../../services/SignUpService';
+import paths from '../../components/Routes/paths';
 
 import styles from './styles.module.scss';
 import { IFormInput } from './types';
@@ -15,11 +16,12 @@ import logo from './assets/image.png';
 
 function SignUp() {
   const { register, errors, handleSubmit, watch } = useForm();
+  const history = useHistory();
 
   const [, loading, error, signUpRequest] = useLazyRequest({
     request: signUpService,
     withPostSuccess: () => {
-      window.location.href = '/';
+      history.push(paths.login);
     }
   });
 
@@ -116,7 +118,7 @@ function SignUp() {
 
         <hr className={styles.appHr} />
 
-        <Link to="/" className={styles.appLink}>
+        <Link to={paths.login} className={styles.appLink}>
           {i18next.t('SignUp:login') as string}
         </Link>
       </form>

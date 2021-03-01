@@ -1,15 +1,20 @@
 import React from 'react';
 import i18next from 'i18next';
+import { useHistory } from 'react-router-dom';
 
 import { removeCurrentUser } from 'services/CurrentUserService';
+
+import paths from '../Routes/paths';
 
 import logo from './assets/image.png';
 import styles from './styles.module.scss';
 
 function NavBar() {
+  const history = useHistory();
+
   const handleLogout = () => {
     removeCurrentUser();
-    window.location.href = '/';
+    history.push(paths.login);
   };
 
   return (
