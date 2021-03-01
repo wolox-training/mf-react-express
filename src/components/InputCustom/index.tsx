@@ -11,13 +11,13 @@ interface Props {
   name: string;
 }
 
-function InputCustom({ error, label, inputRef, inputType, name }: Props) {
+function InputCustom({ error, label, inputClassName, inputRef, inputType, name }: Props) {
   return (
     <>
       <label className={styles.appLabel}>{label}</label>
       <input
         type={inputType}
-        className={`${styles.appInput} ${error ? styles.error : ''}`}
+        className={`${styles.appInput} ${error ? styles.error : ''} ${inputClassName}`}
         name={name}
         aria-label={name}
         ref={inputRef}
