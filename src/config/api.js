@@ -1,6 +1,5 @@
 import { create } from 'apisauce';
 import { SnakecaseSerializer, CamelcaseSerializer } from 'cerealizr';
-import { getCurrentUser } from '../services/CurrentUserService';
 
 const baseURL = 'http://wolox.com';
 
@@ -32,14 +31,6 @@ api.addRequestTransform(request => {
   }
   if (request.data) {
     request.data = snakecaseSerializer.serialize(request.data);
-  }
-
-  const user = getCurrentUser();
-
-  if (user) {
-    request.headers.uid = user.uid;
-    request.headers.client = user.client;
-    request.headers['access-token'] = user.token;
   }
 });
 
