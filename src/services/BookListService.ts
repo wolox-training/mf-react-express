@@ -1,4 +1,4 @@
-import { BooksResponse } from 'components/BookList/types';
+import { BooksResponse } from 'screens/Home/components/BookList/types';
 
 import api from '../config/api';
 

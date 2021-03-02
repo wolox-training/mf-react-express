@@ -19,9 +19,9 @@ import { IFormInputLogin } from './types';
 
 function Login() {
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const { register, errors, handleSubmit } = useForm<IFormInputLogin>();
-  const history = useHistory();
 
   const [, loading, error, loginRequest] = useLazyRequest({
     request: loginService,

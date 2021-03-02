@@ -4,7 +4,7 @@ import i18next from 'i18next';
 import { useRequest } from 'hooks/useRequest';
 import Loading from 'components/Loading';
 
-import { getBooks } from '../../services/BookListService';
+import { getBooks } from '../../../../services/BookListService';
 
 import styles from './styles.module.scss';
 import { Book } from './types';
@@ -30,8 +30,8 @@ function BookList() {
             alt={i18next.t('BooksList:bookAlt') as string}
             className={styles.bookImage}
           />
-          <div className={styles.bookTitle}>{book.title}</div>
-          <div className={styles.bookAuthor}>{book.author}</div>
+          <p className={styles.bookTitle}>{book.title}</p>
+          <p className={styles.bookAuthor}>{book.author}</p>
         </div>
       ))}
     </div>
