@@ -4,23 +4,20 @@ import { BrowserRouter, Switch } from 'react-router-dom';
 import SignUp from 'screens/SignUp';
 import Login from 'screens/Login';
 import Home from 'screens/Home';
-import LocalStorageService from 'services/LocalStorageService';
 import withProvider from 'components/ProviderWrapper';
-import { Context, reducer, INITIAL_STATE, useSelector } from 'contexts/reducer';
+import { Context, reducer, INITIAL_STATE } from 'contexts/reducer';
 import PrivateRoute from 'components/PrivateRoute';
 import PublicRoute from 'components/PublicRoute';
 
 import paths from './paths';
 
 function Routes() {
-  const token = useSelector(state => state.accessToken) || LocalStorageService.getValue('accessToken');
-
   return (
     <BrowserRouter>
       <Switch>
-        <PublicRoute restricted component={Login} authenticated={token} path={paths.login} exact />
-        <PublicRoute component={SignUp} authenticated={token} path={paths.signUp} exact />
-        <PrivateRoute component={Home} authenticated={token} path={paths.home} exact />
+        <PublicRoute restricted component={Login} path={paths.login} exact />
+        <PublicRoute component={SignUp} path={paths.signUp} exact />
+        <PrivateRoute path={paths.home} component={Home} />
       </Switch>
     </BrowserRouter>
   );

@@ -1,19 +1,24 @@
 import React from 'react';
-import { Redirect, Route, RouteComponentProps, RouteProps } from 'react-router';
+import { Route, RouteComponentProps, RouteProps } from 'react-router';
+
+import { useSelector } from 'contexts/reducer';
+import Home from 'screens/Home';
+import LocalStorageService from 'services/LocalStorageService';
 
 interface Props extends RouteProps {
-  authenticated?: boolean;
   component: React.ComponentType<RouteComponentProps>;
   restricted?: boolean;
 }
 
-function PublicRoute({ authenticated, component: Component, restricted = false, ...rest }: Props) {
+function PublicRoute({ component: Component, restricted = false, ...rest }: Props) {
+  const token = useSelector(state => state.accessToken) || LocalStorageService.getValue('accessToken');
+
   return (
     <Route
       {...rest}
       render={props => {
-        if (restricted && authenticated) {
-          return <Redirect to="/home" />;
+        if (restricted && token) {
+          return <Home />;
         }
 
         return <Component {...props} />;
