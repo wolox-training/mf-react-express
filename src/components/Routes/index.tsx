@@ -10,15 +10,17 @@ import { Context, reducer, INITIAL_STATE, useSelector } from 'contexts/reducer';
 import PrivateRoute from 'components/PrivateRoute';
 import PublicRoute from 'components/PublicRoute';
 
+import paths from './paths';
+
 function Routes() {
   const token = useSelector(state => state.accessToken) || LocalStorageService.getValue('accessToken');
 
   return (
     <BrowserRouter>
       <Switch>
-        <PublicRoute restricted component={Login} authenticated={token} path="/" exact />
-        <PublicRoute component={SignUp} authenticated={token} path="/sign_up" exact />
-        <PrivateRoute component={Home} authenticated={token} path="/home" exact />
+        <PublicRoute restricted component={Login} authenticated={token} path={paths.login} exact />
+        <PublicRoute component={SignUp} authenticated={token} path={paths.signUp} exact />
+        <PrivateRoute component={Home} authenticated={token} path={paths.home} exact />
       </Switch>
     </BrowserRouter>
   );

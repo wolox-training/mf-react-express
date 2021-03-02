@@ -1,7 +1,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import i18next from 'i18next';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 import { useLazyRequest } from 'hooks/useRequest';
 import InputCustom from 'components/InputCustom';
@@ -12,6 +12,7 @@ import { loginService } from 'services/LoginService';
 import { actionCreators, useDispatch } from 'contexts/reducer';
 
 import styles from '../SignUp/styles.module.scss';
+import paths from '../../components/Routes/paths';
 
 import logo from './assets/image.png';
 import { IFormInputLogin } from './types';
@@ -20,6 +21,7 @@ function Login() {
   const dispatch = useDispatch();
 
   const { register, errors, handleSubmit } = useForm<IFormInputLogin>();
+  const history = useHistory();
 
   const [, loading, error, loginRequest] = useLazyRequest({
     request: loginService,
@@ -31,7 +33,7 @@ function Login() {
         uid
       });
       dispatch(actionCreators.setSession(response.headers['access-token'], client, uid));
-      window.location.href = '/home';
+      history.push(paths.home);
     }
   });
 
@@ -83,7 +85,7 @@ function Login() {
 
         <hr className={styles.appHr} />
 
-        <Link to="/sign_up" className={styles.appLink}>
+        <Link to={paths.signUp} className={styles.appLink}>
           {i18next.t('Login:signUp') as string}
         </Link>
       </form>
