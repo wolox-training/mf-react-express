@@ -1,9 +1,10 @@
 import { create } from 'apisauce';
-import { SnakecaseSerializer } from 'cerealizr';
+import { SnakecaseSerializer, CamelcaseSerializer } from 'cerealizr';
 
 const baseURL = 'http://wolox.com';
 
-const serializer = new SnakecaseSerializer();
+const snakecaseSerializer = new SnakecaseSerializer();
+const camelCaseSerializer = new CamelcaseSerializer();
 
 if (baseURL === 'http://wolox.com') {
   console.warn('API baseURL has not been properly initialized'); // eslint-disable-line no-console
@@ -26,10 +27,16 @@ api.setBaseURL('https://books-training-rails.herokuapp.com');
 
 api.addRequestTransform(request => {
   if (request.params) {
-    request.params = serializer.serialize(request.params);
+    request.params = snakecaseSerializer.serialize(request.params);
   }
   if (request.data) {
-    request.data = serializer.serialize(request.data);
+    request.data = snakecaseSerializer.serialize(request.data);
+  }
+});
+
+api.addMonitor(response => {
+  if (response.data) {
+    response.data = camelCaseSerializer.serialize(response.data);
   }
 });
 

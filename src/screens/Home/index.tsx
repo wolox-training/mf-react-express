@@ -2,8 +2,15 @@ import React from 'react';
 
 import NavBar from 'components/NavBar';
 
+import BookList from './components/BookList';
+
 function Home() {
-  return <NavBar />;
+  return (
+    <>
+      <NavBar />
+      <BookList />
+    </>
+  );
 }
 
 export default Home;

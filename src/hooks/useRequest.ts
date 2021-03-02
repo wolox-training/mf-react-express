@@ -16,7 +16,7 @@ interface AsyncRequestHookParams<P, D, E, T> {
   withPostSuccess?: Success<T>;
   withPostFailure?: Failure<E>;
   initialState?: T | null;
-  withPostFetch?: PostFetch<T, E>;
+  withPostFetch?: any;
   transformResponse?: (response: D | E) => T;
 }
 
@@ -88,9 +88,7 @@ export const useLazyRequest = <P, D, E, T = D>({
         onPostFetch: response => {
           if (isMounted.current) {
             setLoading(false);
-            if (response.data) {
-              withPostFetch?.(transformResponse(response.data));
-            }
+            withPostFetch?.(response);
           }
         }
       });

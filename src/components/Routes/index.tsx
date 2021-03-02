@@ -4,11 +4,12 @@ import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
 import SignUp from 'screens/SignUp';
 import Login from 'screens/Login';
 import Home from 'screens/Home';
+import LocalStorageService from 'services/LocalStorageService';
 
 import paths from './paths';
 
 function Routes() {
-  const token = localStorage.getItem('accessToken');
+  const token = LocalStorageService.getValue('accessToken');
 
   return (
     <BrowserRouter>

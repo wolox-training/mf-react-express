@@ -2,6 +2,8 @@ import React from 'react';
 import i18next from 'i18next';
 import { useHistory } from 'react-router-dom';
 
+import { removeCurrentUser } from 'services/CurrentUserService';
+
 import paths from '../Routes/paths';
 
 import logo from './assets/image.png';
@@ -11,7 +13,7 @@ function NavBar() {
   const history = useHistory();
 
   const handleLogout = () => {
-    localStorage.clear();
+    removeCurrentUser();
     history.push(paths.login);
   };
 

@@ -6,8 +6,10 @@ import { Link, useHistory } from 'react-router-dom';
 import { useLazyRequest } from 'hooks/useRequest';
 import InputCustom from 'components/InputCustom';
 import Loading from 'components/Loading';
+import { UserResponse } from 'config/types';
+import { setCurrentUser } from 'services/CurrentUserService';
+import { loginService } from 'services/LoginService';
 
-import { loginService } from '../../services/LoginService';
 import styles from '../SignUp/styles.module.scss';
 import paths from '../../components/Routes/paths';
 
@@ -20,8 +22,13 @@ function Login() {
 
   const [, loading, error, loginRequest] = useLazyRequest({
     request: loginService,
-    withPostSuccess: response => {
-      localStorage.setItem('accessToken', response.data.id);
+    withPostFetch: (response: UserResponse) => {
+      const { client, uid } = response.headers;
+      setCurrentUser({
+        'access-token': response.headers['access-token'],
+        client,
+        uid
+      });
       history.push(paths.home);
     }
   });
