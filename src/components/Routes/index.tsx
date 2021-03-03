@@ -4,8 +4,9 @@ import { BrowserRouter, Switch } from 'react-router-dom';
 import SignUp from 'screens/SignUp';
 import Login from 'screens/Login';
 import Home from 'screens/Home';
-import withProvider from 'components/ProviderWrapper';
+import BookDetail from 'screens/BookDetail';
 import { Context, reducer, INITIAL_STATE } from 'contexts/reducer';
+import withProvider from 'components/ProviderWrapper';
 import PrivateRoute from 'components/PrivateRoute';
 import PublicRoute from 'components/PublicRoute';
 
@@ -17,7 +18,8 @@ function Routes() {
       <Switch>
         <PublicRoute restricted component={Login} path={paths.login} exact />
         <PublicRoute component={SignUp} path={paths.signUp} exact />
-        <PrivateRoute path={paths.home} component={Home} />
+        <PrivateRoute path={paths.home} component={Home} exact />
+        <PrivateRoute path={paths.bookDetail} component={BookDetail} exact />
       </Switch>
     </BrowserRouter>
   );
