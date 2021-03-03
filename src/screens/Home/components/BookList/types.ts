@@ -13,3 +13,13 @@ export interface BooksResponse {
   totalPages: number;
   totalCount: number;
 }
+
+export interface BookResponse {
+  id: number;
+  author: string;
+  title: string;
+  imageUrl: string;
+  editor: string;
+  year: string;
+  genre: string;
+}
