@@ -1,7 +1,6 @@
 import React from 'react';
 import { Route, RouteComponentProps, RouteProps } from 'react-router';
 
-import { useSelector } from 'contexts/reducer';
 import Home from 'screens/Home';
 import LocalStorageService from 'services/LocalStorageService';
 
@@ -11,7 +10,7 @@ interface Props extends RouteProps {
 }
 
 function PublicRoute({ component: Component, restricted = false, ...rest }: Props) {
-  const token = useSelector(state => state.accessToken) || LocalStorageService.getValue('accessToken');
+  const token = LocalStorageService.getValue('accessToken');
 
   return (
     <Route
